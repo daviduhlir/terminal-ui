@@ -1,1 +1,1 @@
-# Boilerplate to create TS packages
+# Terminal UI tweaks
