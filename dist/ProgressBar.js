@@ -8,7 +8,7 @@ class ProgressBar extends StaticScreen_1.StaticScreen {
         this.title = title;
         this.internalValue = 0;
         this.renderHandler = () => {
-            let content = `${this.title} [`;
+            let content = `${this.title} [\x1b[36m`;
             for (let i = 0; i < 50; i++) {
                 if (this.internalValue / 2 > i) {
                     content += '=';
@@ -17,7 +17,7 @@ class ProgressBar extends StaticScreen_1.StaticScreen {
                     content += ' ';
                 }
             }
-            content += `] ${Math.floor(this.internalValue)}%\n`;
+            content += `\x1b[0m] \x1b[1m${Math.floor(this.internalValue)}%\x1b[0m\n`;
             this.setContent(content);
         };
     }
