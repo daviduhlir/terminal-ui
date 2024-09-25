@@ -13,13 +13,10 @@ class Table {
     print() {
         const data = this.headers.reduce((acc, header, index) => {
             const values = this.data.map(row => (Array.isArray(row) ? row[index] : row[header]).toString());
-            return {
-                ...acc,
-                [header]: {
+            return Object.assign(Object.assign({}, acc), { [header]: {
                     values,
                     length: values.reduce((acc, value) => value.length > acc ? value.length : acc, 0),
-                }
-            };
+                } });
         }, {});
         let content = '\x1b[100m\x1b[4m\x1b[1m';
         for (let i = 0; i < this.headers.length; i++) {
@@ -48,4 +45,3 @@ class Table {
     }
 }
 exports.Table = Table;
-//# sourceMappingURL=Table.js.map
