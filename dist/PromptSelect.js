@@ -15,6 +15,9 @@ class PromptSelect extends StaticScreen_1.StaticScreen {
             this.selected = preselected;
         }
     }
+    static async prompt(title, options, preselected, multiselect) {
+        return (new PromptSelect(title, options, preselected, multiselect)).prompt();
+    }
     async prompt() {
         this.attachKeyHandler(this.handleKeys);
         this.printOptions();

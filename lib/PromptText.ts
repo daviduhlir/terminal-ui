@@ -1,7 +1,11 @@
 import { StaticScreen } from './StaticScreen'
 
 export class PromptText extends StaticScreen {
-  constructor(readonly title: string) {
+  public static async prompt(title: string, pattern?: RegExp) {
+    return (new PromptText(title, pattern)).prompt()
+  }
+
+  constructor(readonly title: string, readonly pattern?: RegExp) {
     super()
   }
 
@@ -17,6 +21,16 @@ export class PromptText extends StaticScreen {
   }
 
   protected onDatahandler = (data: Buffer) => {
-    this.resolve(data.toString())
+    let value = data.toString()
+    value = value.substring(0, value.length - 1)
+
+    process.stdout.moveCursor(0, -1)
+    process.stdout.clearLine(0)
+
+    if (this.pattern && !this.pattern.test(value)) {
+      this.prompt()
+    } else {
+      this.resolve(value)
+    }
   }
 }

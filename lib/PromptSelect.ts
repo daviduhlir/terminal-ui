@@ -1,6 +1,10 @@
 import { StaticScreen } from './StaticScreen'
 
 export class PromptSelect extends StaticScreen {
+  public static async prompt(title: string, options: { value: string; text: string }[], preselected?: string[], multiselect?: boolean) {
+    return (new PromptSelect(title, options, preselected, multiselect)).prompt()
+  }
+
   protected pointer = null
   protected selected: string[] = []
   constructor(readonly title: string, readonly options: { value: string; text: string }[], preselected?: string[], readonly multiselect?: boolean) {

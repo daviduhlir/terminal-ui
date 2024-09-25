@@ -8,9 +8,9 @@ async function main() {
     {value: 'major', text: 'Major'},
     {value: 'custom', text: 'Custom'},
   ]
-  const selected = await (new PromptSelect('Please select option:', options, ['patch'])).prompt()
+  const selected = await PromptSelect.prompt('Please select option:', options, ['patch'])
   if (selected === 'custom') {
-    console.log('Version:', await (new PromptText('Enter custom version:')).prompt())
+    console.log('Version:', await PromptText.prompt('Enter custom version:', /^([0-9]{1,2})\.([0-9]{1,2})\.([0-9]{1,2})$/))
   }
 
   const loader = new Loader('Waiting...', )
