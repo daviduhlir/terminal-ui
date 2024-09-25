@@ -1,4 +1,12 @@
-import { PromptText, PromptSelect, Loader, ProgressBar } from '@david.uhlir/terminal-ui'
+import { PromptText, PromptSelect, Loader, ProgressBar, Table } from '@david.uhlir/terminal-ui'
+
+console.log('Table1')
+Table.print(['a', 'b'], [['a1', 'b1 jiefjfi'], ['a2', 'b2']], 20)
+console.log('Table2')
+Table.print(['a', 'b'], [['a1', 'b1']], 20)
+console.log('Table3')
+Table.print(['a', 'b'], [['a1', 'b1'], ['a1', 'b1 jiefjfi'], ['a1', 'b1 jiefjfi'], ['a1', 'b1 jiefjfi']], 10)
+
 
 async function main() {
   const options = [
