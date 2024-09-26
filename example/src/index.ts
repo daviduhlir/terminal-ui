@@ -1,6 +1,5 @@
-import { PromptText, PromptSelect, Args, ArgOptionType } from '@david.uhlir/terminal-ui'
+import { PromptText, PromptSelect, Args, ArgOptionType, Exec } from '@david.uhlir/terminal-ui'
 import * as path from 'path'
-import { spawn } from 'child_process'
 import { promises as fs } from 'fs'
 
 const args = Args.parse({
@@ -11,37 +10,6 @@ const args = Args.parse({
     description: 'Type of version incrementation, or custom version'
   }
 })
-
-async function exec(command, ...args) {
-  return new Promise((resolve, reject) => {
-    const cmd = spawn(command, args)
-    let result = null
-    let error = null
-    cmd.stdout.on('data', data => {
-      if (!result) {
-        result = data
-      } else {
-        result = Buffer.concat([result, data])
-      }
-    })
-
-    cmd.stderr.on('data', data => {
-      if (!error) {
-        error = data
-      } else {
-        error = Buffer.concat([error, data])
-      }
-    })
-
-    cmd.on('close', () => {
-      if (error) {
-        reject(error.toString('utf-8'))
-      } else {
-        resolve(result.toString('utf-8'))
-      }
-    })
-  })
-}
 
 async function promptVersion() {
   let version
@@ -81,7 +49,7 @@ async function readVersion() {
   try {
     console.log('Previous version:', await readVersion())
     const version = args.version ? args.version : await promptVersion()
-    await exec('npm', 'version', version)
+    await Exec.cmd('npm', 'version', version)
     console.log('New version:', await readVersion())
     process.exit()
   } catch(e) {
