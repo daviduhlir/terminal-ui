@@ -30,3 +30,4 @@ class ProgressBar extends StaticScreen_1.StaticScreen {
     }
 }
 exports.ProgressBar = ProgressBar;
+//# sourceMappingURL=ProgressBar.js.map
