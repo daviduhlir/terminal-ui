@@ -31,7 +31,7 @@ class PromptText extends StaticScreen_1.StaticScreen {
     }
     static prompt(title, pattern) {
         return __awaiter(this, void 0, void 0, function* () {
-            return (new PromptText(title, pattern)).prompt();
+            return new PromptText(title, pattern).prompt();
         });
     }
     prompt() {

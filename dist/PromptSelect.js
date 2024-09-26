@@ -26,7 +26,7 @@ class PromptSelect extends StaticScreen_1.StaticScreen {
     }
     static prompt(title, options, preselected, multiselect) {
         return __awaiter(this, void 0, void 0, function* () {
-            return (new PromptSelect(title, options, preselected, multiselect)).prompt();
+            return new PromptSelect(title, options, preselected, multiselect).prompt();
         });
     }
     prompt() {

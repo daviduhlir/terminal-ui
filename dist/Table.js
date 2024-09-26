@@ -15,7 +15,7 @@ class Table {
             const values = this.data.map(row => (Array.isArray(row) ? row[index] : row[header]).toString());
             return Object.assign(Object.assign({}, acc), { [header]: {
                     values,
-                    length: values.reduce((acc, value) => value.length > acc ? value.length : acc, 0),
+                    length: values.reduce((acc, value) => (value.length > acc ? value.length : acc), 0),
                 } });
         }, {});
         let content = '\x1b[100m\x1b[4m\x1b[1m';
@@ -37,11 +37,11 @@ class Table {
         console.log(content);
     }
     static fixedLenText(text, length, addPadding = 0) {
-        const padding = ((length - text.length) / 2) + addPadding;
-        return `${(new Array(Math.floor(padding) + 1)).join(' ')}${text}${(new Array(Math.ceil(padding) + 1)).join(' ')}`;
+        const padding = (length - text.length) / 2 + addPadding;
+        return `${new Array(Math.floor(padding) + 1).join(' ')}${text}${new Array(Math.ceil(padding) + 1).join(' ')}`;
     }
     static fill(length, fill) {
-        return (new Array(length + 1)).join(fill);
+        return new Array(length + 1).join(fill);
     }
 }
 exports.Table = Table;

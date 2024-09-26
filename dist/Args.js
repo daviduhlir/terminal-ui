@@ -113,7 +113,9 @@ class Args {
                     definition.short ? `-${definition.short}` : undefined,
                     definition.long ? `--${definition.long}` : undefined,
                     !definition.long && !definition.short ? `--${key}` : undefined,
-                ].filter(Boolean).join(', ');
+                ]
+                    .filter(Boolean)
+                    .join(', ');
                 console.log(` ${definition.required ? '*' : ' '}${defs} [${definition.type}] ${definition.description}`);
             }
         });
