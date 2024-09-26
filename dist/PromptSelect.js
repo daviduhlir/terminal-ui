@@ -15,8 +15,8 @@ const defaultConfig = {
     multiselect: false,
     styles: {
         checked: '[x]',
-        unchecked: '[ ]'
-    }
+        unchecked: '[ ]',
+    },
 };
 class PromptSelect extends StaticScreen_1.StaticScreen {
     constructor(title, options, preselected, config = defaultConfig) {

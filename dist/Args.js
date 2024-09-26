@@ -34,7 +34,7 @@ const fs_1 = require("fs");
 function readPackage() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const packageJson = JSON.parse(yield fs_1.promises.readFile(path.resolve('./package.json'), 'utf-8'));
+            const packageJson = JSON.parse(yield fs_1.promises.readFile(path.resolve(__dirname, '../package.json'), 'utf-8'));
             return {
                 version: packageJson.version,
                 name: packageJson.name,

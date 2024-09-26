@@ -13,7 +13,7 @@ fi
 
 npm run build:release
 npm run test:release
-node ./node_modules/.bin/package-version
+npm version patch
 tag=$(git tag --points-at HEAD)
 git add --all
 git push origin master --tags

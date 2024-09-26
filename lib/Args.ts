@@ -3,7 +3,7 @@ import { promises as fs } from 'fs'
 
 export async function readPackage() {
   try {
-    const packageJson = JSON.parse(await fs.readFile(path.resolve('./package.json'), 'utf-8'))
+    const packageJson = JSON.parse(await fs.readFile(path.resolve(__dirname, '../package.json'), 'utf-8'))
     return {
       version: packageJson.version,
       name: packageJson.name,
