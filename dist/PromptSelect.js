@@ -11,22 +11,30 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PromptSelect = void 0;
 const StaticScreen_1 = require("./StaticScreen");
+const defaultConfig = {
+    multiselect: false,
+    styles: {
+        checked: '[x]',
+        unchecked: '[ ]'
+    }
+};
 class PromptSelect extends StaticScreen_1.StaticScreen {
-    constructor(title, options, preselected, multiselect) {
+    constructor(title, options, preselected, config = defaultConfig) {
         super();
         this.title = title;
         this.options = options;
-        this.multiselect = multiselect;
+        this.config = config;
         this.pointer = null;
         this.selected = [];
+        this.config = Object.assign(Object.assign({}, defaultConfig), config);
         if (preselected) {
             this.pointer = preselected[0];
             this.selected = preselected;
         }
     }
-    static prompt(title, options, preselected, multiselect) {
+    static prompt(title, options, preselected, config = defaultConfig) {
         return __awaiter(this, void 0, void 0, function* () {
-            return new PromptSelect(title, options, preselected, multiselect).prompt();
+            return new PromptSelect(title, options, preselected, config).prompt();
         });
     }
     prompt() {
@@ -40,10 +48,10 @@ class PromptSelect extends StaticScreen_1.StaticScreen {
         let content = `\x1b[1m${this.title}\x1b[0m\n`;
         for (const option of this.options) {
             if (this.selected.includes(option.value)) {
-                content += `${this.multiselect && this.pointer === option.value ? '\x1b[4m' : ''} \x1b[1m[x] \x1b[36m${option.text} \x1b[0m\n`;
+                content += `${this.config.multiselect && this.pointer === option.value ? '\x1b[4m' : ''} \x1b[1m${this.config.styles.checked} \x1b[36m${option.text} \x1b[0m\n`;
             }
             else {
-                content += `${this.multiselect && this.pointer === option.value ? '\x1b[4m' : ''} \x1b[1m[ ] \x1b[36m${option.text} \x1b[0m\n`;
+                content += `${this.config.multiselect && this.pointer === option.value ? '\x1b[4m' : ''} \x1b[1m${this.config.styles.unchecked} \x1b[36m${option.text} \x1b[0m\n`;
             }
         }
         this.setContent(content);
@@ -57,7 +65,7 @@ class PromptSelect extends StaticScreen_1.StaticScreen {
                 const index = this.options.findIndex(o => o.value === this.pointer);
                 this.pointer = this.options[(this.options.length + index - 1) % this.options.length].value;
             }
-            if (!this.multiselect) {
+            if (!this.config.multiselect) {
                 this.selected = [this.pointer];
             }
             this.printOptions();
@@ -70,16 +78,16 @@ class PromptSelect extends StaticScreen_1.StaticScreen {
                 const index = this.options.findIndex(o => o.value === this.pointer);
                 this.pointer = this.options[(this.options.length + index + 1) % this.options.length].value;
             }
-            if (!this.multiselect) {
+            if (!this.config.multiselect) {
                 this.selected = [this.pointer];
             }
             this.printOptions();
         }
         else if (key.name === 'return') {
-            this.resolve(this.multiselect ? this.selected : this.selected[0]);
+            this.resolve(this.config.multiselect ? this.selected : this.selected[0]);
         }
         else if (key.name === 'space') {
-            if (this.multiselect) {
+            if (this.config.multiselect) {
                 const isOn = this.selected.includes(this.pointer);
                 if (isOn) {
                     this.selected = this.selected.filter(o => o !== this.pointer);
