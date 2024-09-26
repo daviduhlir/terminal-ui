@@ -8,7 +8,7 @@ export async function readPackage() {
       version: packageJson.version,
       name: packageJson.name,
     }
-  } catch(e) {
+  } catch (e) {
     throw new Error('Unable to read package.json')
   }
 }
@@ -33,14 +33,14 @@ export interface ArgOptionsCollection {
 }
 
 interface Types {
-  [ArgOptionType.Any]: any,
-  [ArgOptionType.Boolean]: boolean,
-  [ArgOptionType.Number]: number,
-  [ArgOptionType.String]: string,
+  [ArgOptionType.Any]: any
+  [ArgOptionType.Boolean]: boolean
+  [ArgOptionType.Number]: number
+  [ArgOptionType.String]: string
 }
 
 export class Args {
-  static parse<T extends ArgOptionsCollection>(options: T): {[K in keyof T]: Types[T[K]['type']]} {
+  static parse<T extends ArgOptionsCollection>(options: T): { [K in keyof T]: Types[T[K]['type']] } {
     const allArgs = Args.getAllArgs()
     const keys = Object.keys(options)
 
@@ -49,7 +49,7 @@ export class Args {
     }
 
     const result = {}
-    for(const key of keys) {
+    for (const key of keys) {
       const definition = options[key]
 
       let value
@@ -60,7 +60,7 @@ export class Args {
       } else if (definition.short && typeof allArgs[definition.short] !== 'undefined') {
         value = allArgs[definition.short]
         usedKey = definition.short
-      }else if (typeof allArgs[key] !== 'undefined') {
+      } else if (typeof allArgs[key] !== 'undefined') {
         value = allArgs[key]
         usedKey = key
       }
@@ -95,13 +95,15 @@ export class Args {
     console.log(`${packageJon.name}@${packageJon.version}\n`)
     console.log('Arguments:')
     const keys = Object.keys(options)
-    for(const key of keys) {
+    for (const key of keys) {
       const definition = options[key]
       const defs = [
         definition.short ? `-${definition.short}` : undefined,
         definition.long ? `--${definition.long}` : undefined,
         !definition.long && !definition.short ? `--${key}` : undefined,
-      ].filter(Boolean).join(', ')
+      ]
+        .filter(Boolean)
+        .join(', ')
       console.log(` ${definition.required ? '*' : ' '}${defs} [${definition.type}] ${definition.description}`)
     }
   }

@@ -2,7 +2,7 @@ import { StaticScreen } from './StaticScreen'
 
 export class PromptText extends StaticScreen {
   public static async prompt(title: string, pattern?: RegExp) {
-    return (new PromptText(title, pattern)).prompt()
+    return new PromptText(title, pattern).prompt()
   }
 
   constructor(readonly title: string, readonly pattern?: RegExp) {

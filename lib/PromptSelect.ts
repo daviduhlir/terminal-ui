@@ -2,7 +2,7 @@ import { StaticScreen } from './StaticScreen'
 
 export class PromptSelect extends StaticScreen {
   public static async prompt(title: string, options: { value: string; text: string }[], preselected?: string[], multiselect?: boolean) {
-    return (new PromptSelect(title, options, preselected, multiselect)).prompt()
+    return new PromptSelect(title, options, preselected, multiselect).prompt()
   }
 
   protected pointer = null
