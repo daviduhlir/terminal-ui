@@ -21,7 +21,7 @@
   "author": "David Uhlíř",
   "license": "ISC",
   "devDependencies": {
-    "@david.uhlir/package-version": "^1.0.2",
+    "@david.uhlir/package-version": "^1.0.3",
     "@types/mocha": "^10.0.0",
     "@types/node": "^13.11.1",
     "chai": "^4.3.6",
