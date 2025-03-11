@@ -23,4 +23,3 @@ class Loader extends StaticScreen_1.StaticScreen {
     }
 }
 exports.Loader = Loader;
-//# sourceMappingURL=Loader.js.map
