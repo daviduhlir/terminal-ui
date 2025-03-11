@@ -22,7 +22,7 @@ export class PromptText extends StaticScreen {
 
   protected onDatahandler = (data: Buffer) => {
     let value = data.toString()
-    value = value.substring(0, value.length - 1)
+    value = value.substring(0, value.length - 1).trim()
 
     process.stdout.moveCursor(0, -1)
     process.stdout.clearLine(0)
